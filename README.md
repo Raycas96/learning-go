@@ -12,7 +12,7 @@ Check basati sui file presenti nel workspace al momento.
 - [x] Presenza di entrypoint root con `package main` in `main.go`.
 - [x] Entrypoint applicativo in `cmd/api/main.go` da allineare a `package main` + funzione `main`.
 - [x] Primo avvio applicazione riuscito (`go run ./cmd/api`).
-- [ ] Domain model `Vulnerability` implementato.
+- [x] Domain model `Vulnerability` implementato (con Severity, Status, validazioni, JSON tag).
 - [ ] Store concorrente in-memory implementato.
 - [ ] Endpoint `GET /api/vulnerabilities` implementato.
 - [ ] Simulazione real-time con ticker implementata.
