@@ -13,7 +13,7 @@ Check basati sui file presenti nel workspace al momento.
 - [x] Entrypoint applicativo in `cmd/api/main.go` da allineare a `package main` + funzione `main`.
 - [x] Primo avvio applicazione riuscito (`go run ./cmd/api`).
 - [x] Domain model `Vulnerability` implementato (con Severity, Status, validazioni, JSON tag).
-- [ ] Store concorrente in-memory implementato.
+- [x] Store concorrente in-memory implementato (RWMutex, Add, GetAll, GetBySeverity, retention).
 - [ ] Endpoint `GET /api/vulnerabilities` implementato.
 - [ ] Simulazione real-time con ticker implementata.
 
