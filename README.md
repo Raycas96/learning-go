@@ -9,13 +9,13 @@ Check basati sui file presenti nel workspace al momento.
 - [x] Modulo Go inizializzato in `go.mod` (`module micro-vuln-scanner`).
 - [x] Struttura cartelle base creata: `internal/{config,domain,httpapi,logger,service,simulator,store}`.
 - [x] Cartelle `pkg` e `test` create.
-- [x] Presenza di entrypoint root con `package main` in `main.go`.
+- [ ] Presenza di entrypoint root con `package main` in `main.go`.
 - [x] Entrypoint applicativo in `cmd/api/main.go` da allineare a `package main` + funzione `main`.
 - [x] Primo avvio applicazione riuscito (`go run ./cmd/api`).
 - [x] Domain model `Vulnerability` implementato (con Severity, Status, validazioni, JSON tag).
 - [x] Store concorrente in-memory implementato (RWMutex, Add, GetAll, GetBySeverity, retention).
-- [ ] Endpoint `GET /api/vulnerabilities` implementato.
-- [ ] Simulazione real-time con ticker implementata.
+- [x] Endpoint `GET /api/vulnerabilities` implementato.
+- [x] Simulazione real-time con ticker implementata (generazione attiva con graceful shutdown).
 
 ## 0) Stato iniziale e setup
 

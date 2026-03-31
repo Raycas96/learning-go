@@ -32,7 +32,7 @@ func (store *Store) GetAll() []domain.Vulnerability {
 func (store *Store) GetBySeverity(severity domain.Severity) []domain.Vulnerability {
 	store.mutex.RLock()
 	defer store.mutex.RUnlock()
-	var result []domain.Vulnerability
+	var result []domain.Vulnerability = []domain.Vulnerability{}
 	for _,vuln := range store.vulnerabilities {
 		if vuln.Severity == severity {
 			result = append(result, vuln)
