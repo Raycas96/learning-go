@@ -15,6 +15,8 @@ Check basati sui file presenti nel workspace al momento.
 - [x] Domain model `Vulnerability` implementato (con Severity, Status, validazioni, JSON tag).
 - [x] Store concorrente in-memory implementato (RWMutex, Add, GetAll, GetBySeverity, retention).
 - [x] Endpoint `GET /api/vulnerabilities` implementato.
+- [x] Service layer `Vulnerability` implementato (filtro severity spostato dal handler).
+- [x] Risposte API in JSON uniformate anche sugli errori.
 - [x] Simulazione real-time con ticker implementata (generazione attiva con graceful shutdown).
 
 ## 0) Stato iniziale e setup

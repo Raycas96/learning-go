@@ -2,38 +2,43 @@ package httpapi
 
 import (
 	"encoding/json"
-	domain "micro-vuln-scanner/internal/domain"
+	service "micro-vuln-scanner/internal/service"
 	store "micro-vuln-scanner/internal/store"
 	"net/http"
 )
 
+type errorResponse struct {
+	Error string `json:"error"`
+}
+
+func writeJSONError(w http.ResponseWriter, statusCode int, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	_ = json.NewEncoder(w).Encode(errorResponse{Error: message})
+}
+
 type HttpHandler struct {
-	store *store.Store
+	Store *store.Store
 }
 
 func NewHandler(store *store.Store) *HttpHandler {
 	return &HttpHandler{
-		store: store,
+		Store: store,
 	}
 }
 
 func (handler *HttpHandler) GetVulnerabilities(w http.ResponseWriter, request *http.Request) {
-	var vulnerabilities []domain.Vulnerability
 	w.Header().Set("Content-Type", "application/json")
-	if request.URL.Query().Get("severity") != "" {
-		severity, err := domain.ParseSeverity(request.URL.Query().Get("severity"))
-		if err != nil {
-			http.Error(w, "{\"error\": \"Invalid severity value\"}", http.StatusBadRequest)
-			return
-		}
-		 vulnerabilities = handler.store.GetBySeverity(severity)
-	} else {
-	vulnerabilities = handler.store.GetAll()
-	}
-
-	err := json.NewEncoder(w).Encode(vulnerabilities)
+	severity := request.URL.Query().Get("severity")
+	vulnerabilities, err := service.GetVulnerabilities(handler.Store, severity)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		writeJSONError(w, http.StatusBadRequest, "Invalid severity parameter")
 		return
 	}
+
+	if err := json.NewEncoder(w).Encode(vulnerabilities); err != nil {
+		writeJSONError(w, http.StatusInternalServerError, "Failed to encode vulnerabilities")
+		return
+	}
+
 }
